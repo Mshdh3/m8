@@ -1,28 +1,13 @@
-import asyncio
-from aiogram import Bot, Dispatcher
-from m8.fjurur.config import BOT_TOKEN
-from m8.fjurur.database import init_db
-from m8.fjurur.logic import register_handlers
+import telebot
+from database import init_db
+from logic import register_handlers
 
-async def main():
-    while True:
-        try:
-            print("Бот запущен...")
+TOKEN = "YOUR_TOKEN"  # <-- вставь токен
 
-            bot = Bot(token=BOT_TOKEN)
-            dp = Dispatcher()
+bot = telebot.TeleBot(TOKEN)
 
-            # Инициализация базы данных
-            init_db()
+init_db()
+register_handlers(bot)
 
-            # Подключение обработчиков
-            register_handlers(dp)
-
-            await dp.start_polling(bot)
-
-        except Exception as e:
-            print("Ошибка бота:", e)
-            await asyncio.sleep(5)
-
-if __name__ == "__main__":
-    asyncio.run(main())
+print("Бот запущен...")
+bot.polling()
