@@ -1,5 +1,5 @@
 import telebot
-from config import BOT_TOKEN
+from config import TOKEN
 from database import init_db
 from logic import register_handlers
 
@@ -10,4 +10,5 @@ register_handlers(bot)
 
 print("Бот запущен...")
 bot.polling()
+
 
